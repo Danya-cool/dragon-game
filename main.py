@@ -13,7 +13,7 @@ pg.display.set_caption('Бегите, глупцы!')
 user_width = 60
 user_height = 100
 user_x = display_width // 3
-user_y = display_height - 100 - user_height
+user_y = display_height - 150 - user_height
 
 count = 0  # считает картинки дрыгания ногами динозавра
 clock = pg.time.Clock()
@@ -24,7 +24,7 @@ score = 0
 more_than = 50  # минимальное количество очков для продолжения игры
 
 dino_img = [pg.image.load('Dino2_' + str(i) + '.png') for i in range(5)]
-land = pg.image.load('задний фон.png')
+land = pg.image.load('Парк_задний.jpg')
 cuc3 = pg.image.load('Толстый кактус.png')
 
 
@@ -83,9 +83,9 @@ start_button = Button((255, 25, 255), (0, 0, 0))
 info_button = Button((25, 255, 255), (0, 0, 0))
 in_meny = Button((255, 255, 5), (0, 0, 0))
 
-cuctus1 = Cuctus(display_width + 50, display_height - 100 - 140, 30, 140, )
-cuctus2 = Cuctus(display_width + 360, display_height - 100 - 80, 85, 80)
-cuctus3 = Cuctus(display_width + 700, display_height - 100 - 110, 45, 110)
+cuctus1 = Cuctus(display_width + 50, display_height - 150 - 140, 30, 140, )
+cuctus2 = Cuctus(display_width + 360, display_height - 150 - 80, 85, 80)
+cuctus3 = Cuctus(display_width + 700, display_height - 150 - 110, 45, 110)
 cuctus_arr = [cuctus1, cuctus2, cuctus3]
 cuctus_x_pos = [display_width, display_width + 200 * cuctus_arr[0].speed, display_width + 400 * cuctus_arr[0].speed]
 
@@ -186,13 +186,14 @@ def game_over():
     if score > load_currency['record']:
         load_currency['record'] = score
         new_record = True
+    load_currency['all_points'] += score
     with open('currency.json', 'w') as file:
         json.dump(load_currency, file)
 
     while True:
-        print_text('Игра окончена.', 150, 150, (0, 0, 0), 50)
-        print_text(f'-{more_than} валюты, чтобы продолжить [f5]', 150, 230, (0, 0, 0), 20)
-        print_text('ай, блин, больно(((', user_x - 5, user_y - 10, (0, 0, 0), 10)
+        print_text('Игра окончена.', 150, 150, (255, 255, 255), 50)
+        print_text(f'-{more_than} валюты, чтобы продолжить [f5]', 150, 230, (255, 255, 255), 20)
+        print_text('ай, блин, больно(((', user_x - 5, user_y - 10, (255, 255, 255), 10)
         print_text('Всего валюты:' + str(load_currency['all_points']), 700, 10, (0, 0, 0), 10)
         if new_record:
             print_text('Новый рекорд!', 200, 50, (100, 100, 100), 30)
